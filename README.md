@@ -1,12 +1,9 @@
 # Webhook 中转工具
 
 一个基于 Go (Gin 框架) 的 Webhook 中转工具，支持多端接收（Mattermost、群晖 Chat、Gotify、通用 HTTP），使用 SQLite 持久化存储配置。
-
-[https://github.com/make858/Local-multi-end-webhook-forwarding/blob/main/1.png](https://)
-
-[https://github.com/make858/Local-multi-end-webhook-forwarding/blob/main/2.png](https://)
-
-[https://github.com/make858/Local-multi-end-webhook-forwarding/blob/main/3.png](https://)
+![1.png](<assets/1_LXUp4u.png>)
+![2.png](<assets/2_iQi1g-.png>)
+![3.png](<assets/3_7YRfhx.png>)
 
 ## 功能特性
 
