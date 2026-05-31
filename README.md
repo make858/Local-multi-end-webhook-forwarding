@@ -2,6 +2,12 @@
 
 一个基于 Go (Gin 框架) 的 Webhook 中转工具，支持多端接收（Mattermost、群晖 Chat、Gotify、通用 HTTP），使用 SQLite 持久化存储配置。
 
+[https://github.com/make858/Local-multi-end-webhook-forwarding/blob/main/1.png](https://)
+
+[https://github.com/make858/Local-multi-end-webhook-forwarding/blob/main/2.png](https://)
+
+[https://github.com/make858/Local-multi-end-webhook-forwarding/blob/main/3.png](https://)
+
 ## 功能特性
 
 - ✅ **Webhook 中转** - 接收 HTTP 请求并转发到目标 URL
@@ -55,21 +61,23 @@ go build -o webhook-relay main.go
 
 ## 支持的端点类型
 
-| 类型 | 说明 | 配置说明 |
-| --- | --- | --- |
-| mattermost | Mattermost Webhook | URL: Mattermost Webhook 地址 |
-| synology | 群晖 Chat | URL: 群晖 Chat Webhook 地址 |
-| gotify | Gotify 消息推送 | URL: Gotify 地址, Token: Gotify Token |
-| generic | 通用 HTTP | URL: 目标地址 |
+
+| 类型       | 说明               | 配置说明                              |
+| ---------- | ------------------ | ------------------------------------- |
+| mattermost | Mattermost Webhook | URL: Mattermost Webhook 地址          |
+| synology   | 群晖 Chat          | URL: 群晖 Chat Webhook 地址           |
+| gotify     | Gotify 消息推送    | URL: Gotify 地址, Token: Gotify Token |
+| generic    | 通用 HTTP          | URL: 目标地址                         |
 
 ## Web 界面功能
 
 ### 标签页说明
 
-| 标签 | 说明 |
-| --- | --- |
-| 中转规则 | 管理 Webhook 中转规则 |
-| 操作日志 | 实时查看系统操作日志 |
+
+| 标签        | 说明                        |
+| ----------- | --------------------------- |
+| 中转规则    | 管理 Webhook 中转规则       |
+| 操作日志    | 实时查看系统操作日志        |
 | 收到Webhook | 查看所有收到的 Webhook 请求 |
 | 发送Webhook | 查看所有转发的 Webhook 消息 |
 
@@ -92,55 +100,61 @@ go build -o webhook-relay main.go
 
 ### 用户认证
 
-| 方法 | 路径 | 说明 |
-| --- | --- | --- |
-| POST | `/login` | 用户登录 |
-| POST | `/logout` | 用户登出 |
-| GET | `/checkAuth` | 检查登录状态 |
-| POST | `/changePassword` | 修改密码 |
+
+| 方法 | 路径              | 说明         |
+| ---- | ----------------- | ------------ |
+| POST | `/login`          | 用户登录     |
+| POST | `/logout`         | 用户登出     |
+| GET  | `/checkAuth`      | 检查登录状态 |
+| POST | `/changePassword` | 修改密码     |
 
 ### 中转规则
 
-| 方法 | 路径 | 说明 |
-| --- | --- | --- |
-| GET | `/status` | 获取所有规则列表（JSON） |
-| POST | `/relay` | 创建中转规则 |
-| PUT | `/relay/:id` | 更新中转规则 |
-| DELETE | `/relay/:id` | 删除中转规则 |
+
+| 方法   | 路径         | 说明                     |
+| ------ | ------------ | ------------------------ |
+| GET    | `/status`    | 获取所有规则列表（JSON） |
+| POST   | `/relay`     | 创建中转规则             |
+| PUT    | `/relay/:id` | 更新中转规则             |
+| DELETE | `/relay/:id` | 删除中转规则             |
 
 ### 多端端点
 
-| 方法 | 路径 | 说明 |
-| --- | --- | --- |
-| GET | `/endpoints/:relay_id` | 获取规则的端点列表 |
-| POST | `/endpoint` | 创建端点 |
-| PUT | `/endpoint/:id` | 更新端点 |
-| DELETE | `/endpoint/:id` | 删除端点 |
-| POST | `/endpoint/test` | 测试端点连接 |
+
+| 方法   | 路径                   | 说明               |
+| ------ | ---------------------- | ------------------ |
+| GET    | `/endpoints/:relay_id` | 获取规则的端点列表 |
+| POST   | `/endpoint`            | 创建端点           |
+| PUT    | `/endpoint/:id`        | 更新端点           |
+| DELETE | `/endpoint/:id`        | 删除端点           |
+| POST   | `/endpoint/test`       | 测试端点连接       |
 
 ### Webhook 接收
 
-| 方法 | 路径 | 说明 |
-| --- | --- | --- |
-| ANY | `/webhook/:path` | 接收 Webhook 并中转 |
-| ANY | `/direct/:endpointPath` | 端点直接访问 |
+
+| 方法 | 路径                    | 说明                |
+| ---- | ----------------------- | ------------------- |
+| ANY  | `/webhook/:path`        | 接收 Webhook 并中转 |
+| ANY  | `/direct/:endpointPath` | 端点直接访问        |
 
 ### Webhook 监控
 
-| 方法 | 路径 | 说明 |
-| --- | --- | --- |
-| GET | `/webhook/received` | 获取收到的消息列表 |
-| DELETE | `/webhook/received` | 清空收到的消息 |
-| GET | `/webhook/sent` | 获取发送的消息列表 |
-| DELETE | `/webhook/sent` | 清空发送的消息 |
+
+| 方法   | 路径                | 说明               |
+| ------ | ------------------- | ------------------ |
+| GET    | `/webhook/received` | 获取收到的消息列表 |
+| DELETE | `/webhook/received` | 清空收到的消息     |
+| GET    | `/webhook/sent`     | 获取发送的消息列表 |
+| DELETE | `/webhook/sent`     | 清空发送的消息     |
 
 ### 系统接口
 
-| 方法 | 路径 | 说明 |
-| --- | --- | --- |
-| GET | `/logs` | 获取最近的操作日志 |
-| GET | `/logs/sse` | SSE 实时日志推送 |
-| GET | `/addresses` | 获取服务器地址列表 |
+
+| 方法 | 路径         | 说明               |
+| ---- | ------------ | ------------------ |
+| GET  | `/logs`      | 获取最近的操作日志 |
+| GET  | `/logs/sse`  | SSE 实时日志推送   |
+| GET  | `/addresses` | 获取服务器地址列表 |
 
 ## 使用示例
 
